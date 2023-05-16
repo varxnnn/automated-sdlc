@@ -17,23 +17,6 @@ resource "aws_instance" "ec2_instance" {
     associate_public_ip_address = true
     vpc_security_group_ids = [ "${aws_security_group.public_sg1.id}" ]
     user_data = file("${path.module}/bootstrap/script.sh")
-    
-    # connection {
-    #   type = "ssh"
-    #   user = "ec2-user"
-    #   private_key = file("${path.module}/tf_test.pem")
-    #   host = self.public_ip
-    # }
-
-    # provisioner "remote-exec" {
-    #     inline = [ 
-    #         "sudo yum -y install docker", 
-    #         "sudo usermod -a -G docker ec2-user", 
-    #         "sudo systemctl start docker",
-    #         "whoami",
-    #         "docker run -d --name nexus --restart unless-stopped -p 8081:8081 -v nexus-data:/nexus-data sonatype/nexus3" 
-    #     ]
-    # }
 } 
 
 resource "aws_vpc" "test_vpc" {
