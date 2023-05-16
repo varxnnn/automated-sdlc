@@ -10,10 +10,10 @@ terraform {
 }
 
 resource "aws_instance" "ec2_instance" {
-    ami = var.ami_id
+    ami = "ami-0b08bfc6ff7069aff"
     subnet_id = aws_subnet.public_subnet.id
-    instance_type = var.instance_type
-    key_name = var.ami_key_pair_name
+    instance_type = "t2.large"
+    key_name = "tf_test"
     associate_public_ip_address = true
     vpc_security_group_ids = [ "${aws_security_group.public_sg1.id}" ]
     user_data = file("${path.module}/bootstrap/script.sh")
