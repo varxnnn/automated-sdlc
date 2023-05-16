@@ -34,16 +34,12 @@ jobs:
         cd terraform
         terraform init
         
-    - name: Terraform Validate
+    - name: Terraform Plan
       run: |
         cd terraform 
-        ls
-        terraform validate
+        terraform plan
 
-    # - name: Terraform Apply
-    #   run: terraform apply -auto-approve
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #     TF_ACTION_WORKING_DIR: '.'
-    #     AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - name: Terraform Apply
+      run: |
+        cd terraform
+        terraform apply -auto-approve
