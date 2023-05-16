@@ -1,0 +1,49 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  Terraform:
+    name: Terraform Plan & Apply
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+        aws-region: ap-south-1
+
+    - name: Terraform Setup
+      uses: hashicorp/setup-terraform@v2.0.3
+      
+    - name: Making tfvars
+      run: |
+        cd terraform
+        echo "${{ secrets.tfvars }}" >> terraform.tfvars
+        printenv
+    
+    - name: Terraform Init
+      run: |
+        cd terraform
+        terraform init
+        
+    # - name: Terraform Plan
+    #   run: |
+    #     cd terraform
+    #     terraform plan
+
+    # - name: Terraform Apply
+    #   run: terraform apply -auto-approve
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     TF_ACTION_WORKING_DIR: '.'
+    #     AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
