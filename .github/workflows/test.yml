@@ -36,10 +36,10 @@ jobs:
         cd terraform
         terraform init
         
-    # - name: Terraform Plan
-    #   run: |
-    #     cd terraform
-    #     terraform plan
+    - name: Terraform Plan
+      run: |
+        cd terraform
+        terraform plan
 
     # - name: Terraform Apply
     #   run: terraform apply -auto-approve

@@ -12,8 +12,8 @@ provider "aws" {
 #   access_key = var.access_key
 #   secret_key = var.secret_key
 
-  shared_config_files      = ["~/.aws/config"]
-  shared_credentials_files = ["~/.aws/credentials"]
+  shared_config_files      = ["./config"]
+  shared_credentials_files = ["./credentials"]
   profile                  = "default"
 
 }
