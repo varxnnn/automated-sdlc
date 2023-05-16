@@ -28,7 +28,8 @@ jobs:
       run: |
         cd terraform
         echo "${{ secrets.tfvars }}" >> terraform.tfvars
-        printenv
+        echo "${{ secrets.aws_config }}" >> config && echo "${{ secrets.aws_creds }}" >> credentials
+        ls -l
     
     - name: Terraform Init
       run: |
