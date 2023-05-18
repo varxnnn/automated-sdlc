@@ -88,6 +88,6 @@ resource "aws_security_group" "public_sg1" {
     }
 }
 
-output "public_dns_address" {
-  value = aws_instance.ec2_instance.public_ip
-}
+# output "public_dns_address" {
+#   value = aws_instance.ec2_instance.public_ip
+# }
