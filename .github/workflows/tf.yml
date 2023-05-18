@@ -22,7 +22,9 @@ jobs:
         aws-region: ap-south-1
 
     - name: Terraform Setup
-      uses: hashicorp/setup-terraform@v2.0.3
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
       
     - name: Making tfvars
       run: |
@@ -57,8 +59,8 @@ jobs:
     - name: Fetching IPs
       run: |
         cd terraform
-        terraform output -raw public_dns_address
         export SERVER_IP=$(terraform output -raw public_dns_address)
+        echo "------------"
         echo $SERVER_IP
 
     - name: Terraform Destroy
