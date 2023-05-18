@@ -54,7 +54,14 @@ jobs:
     #     file-path: './terraform/ip.txt'
     #     output-file-url: 'true'
 
+    - name: Fetching IPs
+      run: |
+        cd terraform
+        export SERVER_IP=$(terraform output -raw public_ip_address)
+        echo $SERVER_IP
+        
     - name: Terraform Destroy
       run: |
         cd terraform
         terraform destroy -auto-approve
+

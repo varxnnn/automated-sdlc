@@ -6,8 +6,8 @@ on:
       - pausingwflow
 
 jobs:
-  Terraform:
-    name: Terraform Plan & Apply
+  Deploying_Image:
+    name: Dockerizing Application and Publishing to DockerHub
     runs-on: ubuntu-latest
     steps:
 
@@ -33,16 +33,12 @@ jobs:
       run: |
         cd terraform
         terraform init
-        
-    - name: Terraform Plan
-      run: |
-        cd terraform 
-        terraform plan
 
-    - name: Terraform Apply
+    - name: Fetching IPs
       run: |
         cd terraform
-        terraform apply -auto-approve
+        export SERVER_IP=$(terraform output -raw public_ip_address)
+        
 
     - name: Terraform Destroy
       run: |
