@@ -1,4 +1,4 @@
-name: tf
+name: CI/CD Automating SDLC
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
       with:
         terraform_wrapper: false
       
-    - name: Making tfvars
+    - name: Handling AWS Profile Files
       run: |
         cd terraform
         echo "${{ secrets.aws_config }}" >> config && echo "${{ secrets.aws_creds }}" >> credentials
@@ -36,11 +36,6 @@ jobs:
       run: |
         cd terraform
         terraform init
-        
-    # - name: Terraform Plan
-    #   run: |
-    #     cd terraform 
-    #     terraform plan
 
     - name: Terraform Apply
       run: |
@@ -54,10 +49,12 @@ jobs:
         export SERVER_IP=$(terraform output -raw public_dns_address)
         echo "SERVER_IP=$SERVER_IP" >> $GITHUB_OUTPUT  
         echo $SERVER_IP
+
     # - name: Terraform Destroy
     #   run: |
     #     cd terraform
     #     terraform destroy -auto-approve
+    
     outputs:
       SERVER_IP: ${{ steps.fetching_ip.outputs.SERVER_IP }}
 
