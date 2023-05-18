@@ -12,7 +12,7 @@ terraform {
 resource "aws_instance" "ec2_instance" {
     ami = "ami-0b08bfc6ff7069aff"
     subnet_id = aws_subnet.public_subnet.id
-    instance_type = "t2.large"
+    instance_type = "t2.small"
     key_name = "tf_test"
     associate_public_ip_address = true
     vpc_security_group_ids = [ "${aws_security_group.public_sg1.id}" ]
