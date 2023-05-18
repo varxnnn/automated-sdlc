@@ -57,9 +57,9 @@ jobs:
     - name: Fetching IPs
       run: |
         cd terraform
-        export SERVER_IP=$(terraform output -raw public_ip_address)
+        export SERVER_IP=$(terraform output -raw public_dns_address)
         echo $SERVER_IP
-        
+
     - name: Terraform Destroy
       run: |
         cd terraform
