@@ -1,0 +1,61 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  Terraform:
+    name: Terraform Plan & Apply
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+        aws-region: ap-south-1
+
+    - name: Terraform Setup
+      uses: hashicorp/setup-terraform@v2.0.3
+      
+    - name: Making tfvars
+      run: |
+        cd terraform
+        echo "${{ secrets.aws_config }}" >> config && echo "${{ secrets.aws_creds }}" >> credentials
+    
+    - name: Terraform Init
+      run: |
+        cd terraform
+        terraform init
+        
+    - name: Terraform Plan
+      run: |
+        cd terraform 
+        terraform plan
+
+    - name: Terraform Apply
+      run: |
+        cd terraform
+        terraform apply -auto-approve
+        terraform output -raw public_ip_address > ip.txt
+
+    - name: Uploading IPs to S3
+      uses: hkusu/s3-upload-action@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+        aws-region: 'ap-south-1'
+        aws-bucket: ${{ secrets.AWS_BUCKET }}
+        file-path: './terraform/ip.txt'
+        output-file-url: 'true'
+
+    # - name: Terraform Destroy
+    #   run: |
+    #     cd terraform
+    #     terraform destroy -auto-approve
