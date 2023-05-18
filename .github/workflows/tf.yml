@@ -48,6 +48,7 @@ jobs:
         terraform apply -auto-approve
 
     - name: Fetching IPs
+      id: fetching_ip
       run: |
         cd terraform
         export SERVER_IP=$(terraform output -raw public_dns_address)
@@ -57,6 +58,8 @@ jobs:
     #   run: |
     #     cd terraform
     #     terraform destroy -auto-approve
+    outputs:
+      SERVER_IP: ${{ steps.fetching_ip.outputs.SERVER_IP }}
 
   Pushing_Image:
     name: Dockerizing Application and Publishing to DockerHub
@@ -135,7 +138,7 @@ jobs:
       env:
         SERVER_IP: $SERVER_IP
       with:
-        host: ${{needs.Terraform_Provisioning.outputs.SERVER_IP}}
+        host: ${{ needs.Terraform_Provisioning.outputs.SERVER_IP }}
         username: ${{ secrets.ssh_username }}
         key: ${{ secrets.ssh_key }}
         port: 22
