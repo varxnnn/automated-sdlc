@@ -43,7 +43,6 @@ jobs:
       run: |
         cd terraform
         terraform apply -auto-approve
-        terraform output -raw public_ip_address > ip.txt
 
     - name: Uploading IPs to S3
       uses: hkusu/s3-upload-action@v2
@@ -55,7 +54,7 @@ jobs:
         file-path: './terraform/ip.txt'
         output-file-url: 'true'
 
-    # - name: Terraform Destroy
-    #   run: |
-    #     cd terraform
-    #     terraform destroy -auto-approve
+    - name: Terraform Destroy
+      run: |
+        cd terraform
+        terraform destroy -auto-approve
