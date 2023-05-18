@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - test
 
 jobs:
   Pushing_Image:
@@ -44,31 +44,31 @@ jobs:
 #     runs-on: ubuntu-latest
 #     steps:
 
-#     - name: Checkout Repo
-#       uses: actions/checkout@v3
+    - name: Checkout Repo
+      uses: actions/checkout@v3
 
-#     - name: Configure AWS Credentials
-#       uses: aws-actions/configure-aws-credentials@v2
-#       with:
-#         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-#         aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-#         aws-region: ap-south-1
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+        aws-region: ap-south-1
 
-#     - name: Terraform Setup
-#       uses: hashicorp/setup-terraform@v2.0.3
+    - name: Terraform Setup
+      uses: hashicorp/setup-terraform@v2.0.3
       
-#     - name: Making tfvars
-#       run: |
-#         cd terraform
-#         echo "${{ secrets.aws_config }}" >> config && echo "${{ secrets.aws_creds }}" >> credentials
+    - name: Making tfvars
+      run: |
+        cd terraform
+        echo "${{ secrets.aws_config }}" >> config && echo "${{ secrets.aws_creds }}" >> credentials
     
-#     - name: Terraform Init
-#       run: |
-#         cd terraform
-#         terraform init
+    - name: Terraform Init
+      run: |
+        cd terraform
+        terraform init
 
-#     - name: Fetching IPs
-#       run: |
-#         cd terraform
-#         export SERVER_IP=$(terraform output -raw public_dns_address)
+    - name: Fetching IPs
+      run: |
+        cd terraform
+        export SERVER_IP=$(terraform output -raw public_dns_address)
     
