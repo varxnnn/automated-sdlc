@@ -124,7 +124,7 @@ jobs:
     - name: Pulling image, running container
       uses: appleboy/ssh-action@v0.1.10
       env:
-        SERVER_IP: "$SERVER_IP"
+        SERVER_IP: $SERVER_IP
       with:
         host: ${{ env.SERVER_IP }}
         username: ${{ secrets.ssh_username }}
