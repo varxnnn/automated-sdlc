@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - pausingwflow
+      - master
 
 jobs:
   Pushing_Image:
