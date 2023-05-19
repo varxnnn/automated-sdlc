@@ -3,7 +3,7 @@ name: CI/CD Automating SDLC
 on:
   push:
     branches:
-      - master
+      - deployment
 
 jobs:
   Terraform_Provisioning:
