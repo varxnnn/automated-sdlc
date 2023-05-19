@@ -109,3 +109,5 @@ jobs:
           docker pull varxn/major-react:deployment
           docker run -d --name react --restart unless-stopped -p 80:80 varxn/major-react:deployment
       
+    - name: CI/CD Successful!
+      run: echo "Code deployed to ${{ needs.Terraform_Provisioning.outputs.SERVER_IP }}"
