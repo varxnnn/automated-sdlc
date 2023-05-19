@@ -106,6 +106,6 @@ jobs:
         key: ${{ secrets.ssh_key }}
         port: 22
         script: |
-          docker pull varxn/major-react:master
-          docker run -d --name react --restart unless-stopped -p 80:80 varxn/major-react:master
+          docker pull varxn/major-react:deployment
+          docker run -d --name react --restart unless-stopped -p 80:80 varxn/major-react:deployment
       
