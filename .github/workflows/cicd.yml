@@ -57,7 +57,7 @@ jobs:
   Pushing_Image:
     name: Dockerizing Application and Publishing to DockerHub
     runs-on: ubuntu-latest
-    needs: Terraform_Provisioning
+    # needs: Terraform_Provisioning
 
     steps:
 
