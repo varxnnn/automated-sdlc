@@ -3,7 +3,7 @@ name: CI/CD Automating SDLC
 on:
   push:
     branches:
-      - master
+      - deployment
 
 jobs:
   Terraform_Provisioning:
@@ -53,7 +53,7 @@ jobs:
     outputs:
       SERVER_IP: ${{ steps.fetching_ip.outputs.SERVER_IP }}
 
-      
+
   Pushing_Image:
     name: Dockerizing Application and Publishing to DockerHub
     runs-on: ubuntu-latest
