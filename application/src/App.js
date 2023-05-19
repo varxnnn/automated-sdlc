@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Latest Code.
+          Welcome, Panelists!
         </a>
       </header>
     </div>
