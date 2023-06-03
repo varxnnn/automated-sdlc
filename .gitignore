@@ -157,7 +157,8 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
-terraform-local/
+terraform.local/
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged
