@@ -1,0 +1,45 @@
+---
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    networks: 
+      - profana
+    ports: 
+      - 9090:9090
+    container_name: prometheus
+    volumes:
+      - /Users/varunsharma/Testing/major-project/monitoring/prometheus.yaml:/etc/prometheus/prometheus.yml:ro,Z
+    
+  local-react:
+    build:
+      context: ../application/
+      dockerfile: Dockerfile
+    networks: 
+      - profana
+    ports: 
+      - 80:80
+      - 81:81
+    container_name: react
+
+  nginx-exporter:
+    image: nginx/nginx-prometheus-exporter:latest
+    networks:
+      - profana
+    ports:
+      - 9113:9113
+    container_name: nginx_exporter
+    command: ["-nginx.scrape-uri", "http://local-react:81/"]
+  
+  grafana:
+    image: grafana/grafana-oss:latest
+    networks:
+      - profana
+    ports: 
+      - 3000:3000
+    container_name: grafana
+    volumes:
+      - ./grafana/provisioning/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - ./grafana/provisioning/dashboards/:/etc/grafana/provisioning/dashboards/
+  
+networks:
+  profana:
