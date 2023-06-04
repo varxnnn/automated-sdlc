@@ -12,7 +12,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          bruh 2.0
+          This means that the application has been built.
         </a>
       </header>
     </div>
