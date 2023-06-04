@@ -110,4 +110,7 @@ jobs:
           docker-compose up --build -d
       
     - name: CI/CD Successful!
-      run: echo "Code deployed! Here's the IP - ${{ needs.Terraform_Provisioning.outputs.SERVER_IP }}"
+      run: |
+        echo "Code deployed! Here's the IP - http://${{ needs.Terraform_Provisioning.outputs.SERVER_IP }}/"
+        echo "To see your dashboard, head on over to http://${{ needs.Terraform_Provisioning.outputs.SERVER_IP }}:3000/"
+        echo "IMPORT DASHBOARD ID: 12708"
