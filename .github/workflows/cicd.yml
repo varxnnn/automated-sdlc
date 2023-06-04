@@ -107,6 +107,7 @@ jobs:
         port: 22
         script: |
           cd monitoring
+          docker-compose pull
           docker-compose up --build -d
       
     - name: CI/CD Successful!
