@@ -11,3 +11,4 @@ Since the project covers the entire SDLC, I intend to extend this project functi
 - [ ] Prometheus + Grafana dashboard for server monitoring
 - [ ] ELK Stack dashboard for Logs monitoring
   - [ ] Packer for AMIs
+
