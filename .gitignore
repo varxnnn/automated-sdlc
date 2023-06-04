@@ -139,6 +139,7 @@ dist
 # vuepress v2.x temp and cache directory
 .temp
 .cache
+*.pem
 
 # Docusaurus cache and generated files
 .docusaurus
@@ -166,3 +167,5 @@ terraform.local/
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+config
+credentials
