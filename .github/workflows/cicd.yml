@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v3
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
@@ -106,8 +106,8 @@ jobs:
         key: ${{ secrets.ssh_key }}
         port: 22
         script: |
-          docker pull varxn/major-react:deployment
-          docker run -d --name react --restart unless-stopped -p 80:80 varxn/major-react:deployment
+          cd monitoring
+          docker-compose up --build -d
       
     - name: CI/CD Successful!
       run: echo "Code deployed! Here's the IP - ${{ needs.Terraform_Provisioning.outputs.SERVER_IP }}"
