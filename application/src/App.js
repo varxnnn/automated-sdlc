@@ -12,7 +12,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Hello
+          bruh 2.0
         </a>
       </header>
     </div>
