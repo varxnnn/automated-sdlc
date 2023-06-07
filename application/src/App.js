@@ -12,7 +12,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          This means that the application has been built.
+          This is a change.
         </a>
       </header>
     </div>
